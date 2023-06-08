@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 public class CarController {
 
@@ -32,7 +35,17 @@ public class CarController {
 
     @GetMapping("/car")
     public ResponseEntity<List<CarModel>> getAllCars() {
-        return ResponseEntity.ok(carRepository.findAll());
+        List<CarModel> carList = carRepository.findAll();
+
+        carList.forEach(car -> {
+            UUID idCar = car.getIdCar();
+            car.add(linkTo(methodOn(CarController.class)
+                    .getOneCar(idCar))
+                    .withSelfRel()
+            );
+        });
+
+        return ResponseEntity.ok(carList);
     }
 
     @GetMapping("/car/{id}")
@@ -42,7 +55,18 @@ public class CarController {
         if (carOptional.isEmpty()) {
             throw new CarNotFoundException();
         }
-        return ResponseEntity.ok(carOptional.get());
+
+        var car = carOptional.get();
+        car.add(linkTo(
+                methodOn(CarController.class)
+                        .getAllCars())
+                .withRel("Car List"));
+        car.add(linkTo(
+                methodOn(CarController.class)
+                        .deleteCar(car.getIdCar()))
+                .withRel("Delete")
+        );
+        return ResponseEntity.ok(car);
     }
 
     @PutMapping("/car/{id}")
