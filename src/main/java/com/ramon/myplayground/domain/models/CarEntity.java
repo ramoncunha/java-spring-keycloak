@@ -1,6 +1,9 @@
-package com.ramon.myplayground.models;
+package com.ramon.myplayground.domain.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.hateoas.RepresentationModel;
@@ -10,8 +13,11 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_cars")
-public class CarModel extends RepresentationModel<CarModel> {
+public class CarEntity extends RepresentationModel<CarEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +29,10 @@ public class CarModel extends RepresentationModel<CarModel> {
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
+
+    public void setIdCar(UUID idCar) {
+        this.idCar = idCar;
+    }
 
     public UUID getIdCar() {
         return idCar;

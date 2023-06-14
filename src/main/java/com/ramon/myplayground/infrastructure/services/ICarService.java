@@ -1,0 +1,16 @@
+package com.ramon.myplayground.infrastructure.services;
+
+import com.ramon.myplayground.application.dtos.CarRequest;
+import com.ramon.myplayground.domain.models.CarEntity;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface ICarService {
+
+    CarEntity save(CarRequest carRequest);
+    List<CarEntity> findAll();
+    CarEntity findById(UUID id);
+    CarEntity update(CarRequest carRequest);
+    void delete(UUID id);
+}

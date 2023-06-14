@@ -1,4 +1,4 @@
-package com.ramon.myplayground.exceptions;
+package com.ramon.myplayground.domain.exceptions;
 
 public class CarNotFoundException extends RuntimeException {
 

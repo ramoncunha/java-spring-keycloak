@@ -1,10 +1,14 @@
-package com.ramon.myplayground.controllers;
+package com.ramon.myplayground.application.presentation;
 
-import com.ramon.myplayground.dtos.CarRecord;
-import com.ramon.myplayground.exceptions.CarNotFoundException;
-import com.ramon.myplayground.models.CarModel;
-import com.ramon.myplayground.repositories.CarRepository;
+import com.ramon.myplayground.application.dtos.CarRequest;
+import com.ramon.myplayground.application.mappers.CarMapper;
+import com.ramon.myplayground.application.services.CarService;
+import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
+import com.ramon.myplayground.domain.models.Car;
+import com.ramon.myplayground.domain.models.CarEntity;
+import com.ramon.myplayground.infrastructure.repositories.CarRepository;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,44 +17,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequiredArgsConstructor
 public class CarController {
 
     private final CarRepository carRepository;
-
-    public CarController(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+    private final CarService carService;
 
     @PostMapping("/car")
-    public ResponseEntity<CarModel> saveCar(@RequestBody @Valid CarRecord carRecord) {
-        var car = new CarModel();
-        BeanUtils.copyProperties(carRecord, car);
-        return ResponseEntity.status(HttpStatus.CREATED).body(carRepository.save(car));
+    public ResponseEntity<Car> saveCar(@RequestBody @Valid CarRequest carRequest) {
+        CarEntity carEntity = carService.save(carRequest);
+        Car newCar = CarMapper.fromCarEntity(carEntity);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(newCar);
     }
 
     @GetMapping("/car")
-    public ResponseEntity<List<CarModel>> getAllCars() {
-        List<CarModel> carList = carRepository.findAll();
-
-        carList.forEach(car -> {
-            UUID idCar = car.getIdCar();
-            car.add(linkTo(methodOn(CarController.class)
-                    .getOneCar(idCar))
-                    .withSelfRel()
-            );
-        });
-
+    public ResponseEntity<List<Car>> getAllCars() {
+        List<Car> carList = carService.findAll().stream()
+                .map(CarMapper::fromCarEntity)
+                .collect(Collectors.toList());
         return ResponseEntity.ok(carList);
     }
 
     @GetMapping("/car/{id}")
-    public ResponseEntity<CarModel> getOneCar(@PathVariable(value = "id") UUID id) {
-        Optional<CarModel> carOptional = carRepository.findById(id);
+    public ResponseEntity<CarEntity> getOneCar(@PathVariable(value = "id") UUID id) {
+        Optional<CarEntity> carOptional = carRepository.findById(id);
 
         if (carOptional.isEmpty()) {
             throw new CarNotFoundException();
@@ -70,22 +67,22 @@ public class CarController {
     }
 
     @PutMapping("/car/{id}")
-    public ResponseEntity<CarModel> updateCar(@PathVariable(value = "id") UUID id,
-                                              @RequestBody @Valid CarRecord carRecord) {
-        Optional<CarModel> carOptional = carRepository.findById(id);
+    public ResponseEntity<CarEntity> updateCar(@PathVariable(value = "id") UUID id,
+                                               @RequestBody @Valid CarRequest carRequest) {
+        Optional<CarEntity> carOptional = carRepository.findById(id);
 
         if (carOptional.isEmpty()) {
             throw new CarNotFoundException();
         }
 
         var car = carOptional.get();
-        BeanUtils.copyProperties(carRecord, car);
+        BeanUtils.copyProperties(carRequest, car);
         return ResponseEntity.ok(carRepository.save(car));
     }
 
     @DeleteMapping("/car/{id}")
     public ResponseEntity<String> deleteCar(@PathVariable(value = "id")UUID id) {
-        Optional<CarModel> carOptional = carRepository.findById(id);
+        Optional<CarEntity> carOptional = carRepository.findById(id);
 
         if (carOptional.isEmpty()) {
             throw new CarNotFoundException();
