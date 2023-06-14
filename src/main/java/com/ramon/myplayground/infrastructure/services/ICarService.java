@@ -9,8 +9,12 @@ import java.util.UUID;
 public interface ICarService {
 
     CarEntity save(CarRequest carRequest);
+
     List<CarEntity> findAll();
+
     CarEntity findById(UUID id);
-    CarEntity update(CarRequest carRequest);
+
+    CarEntity update(UUID id, CarRequest carRequest);
+
     void delete(UUID id);
 }

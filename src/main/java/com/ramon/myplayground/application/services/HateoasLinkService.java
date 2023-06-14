@@ -8,11 +8,23 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
-public class HateoasLink {
+public class HateoasLinkService {
 
-    public void findAllLink(CarEntity carEntity) {
+    public void getOneLink(CarEntity carEntity) {
         linkTo(methodOn(CarController.class)
                 .getOneCar(carEntity.getIdCar()))
                 .withSelfRel();
+    }
+
+    public void getAllLink(CarEntity car) {
+        linkTo(methodOn(CarController.class)
+                .getAllCars())
+                .withRel("Car List");
+    }
+
+    public void deleteLink(CarEntity car) {
+        linkTo(methodOn(CarController.class)
+                .deleteCar(car.getIdCar()))
+                .withRel("Delete");
     }
 }
