@@ -3,6 +3,7 @@ package com.ramon.myplayground.application.presentation;
 import com.ramon.myplayground.application.dtos.CarRequest;
 import com.ramon.myplayground.application.mappers.CarMapper;
 import com.ramon.myplayground.application.services.CarService;
+import com.ramon.myplayground.application.services.HateoasLinkService;
 import com.ramon.myplayground.domain.models.Car;
 import com.ramon.myplayground.domain.models.CarEntity;
 import jakarta.validation.Valid;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class CarController {
 
     private final CarService carService;
+    private final HateoasLinkService hateoasLinkService;
 
     @PostMapping("/car")
     public ResponseEntity<Car> saveCar(@RequestBody @Valid CarRequest carRequest) {
@@ -33,19 +35,24 @@ public class CarController {
     public ResponseEntity<List<Car>> getAllCars() {
         List<Car> carList = carService.findAll().stream()
                 .map(CarMapper::fromCarEntity)
-                .collect(Collectors.toList());
+                .peek(car -> car.add(
+                        hateoasLinkService.getOneLink(car.getIdCar()))
+                ).collect(Collectors.toList());
         return ResponseEntity.ok(carList);
     }
 
     @GetMapping("/car/{id}")
     public ResponseEntity<Car> getOneCar(@PathVariable(value = "id") UUID id) {
         CarEntity carEntity = carService.findById(id);
-        return ResponseEntity.ok(CarMapper.fromCarEntity(carEntity));
+        Car car = CarMapper.fromCarEntity(carEntity);
+        car.add(hateoasLinkService.getAllLink());
+        car.add(hateoasLinkService.deleteLink(car.getIdCar()));
+        return ResponseEntity.ok(car);
     }
 
     @PutMapping("/car/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable(value = "id") UUID id,
-                                               @RequestBody @Valid CarRequest carRequest) {
+                                         @RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.update(id, carRequest);
         return ResponseEntity.ok(CarMapper.fromCarEntity(carEntity));
     }

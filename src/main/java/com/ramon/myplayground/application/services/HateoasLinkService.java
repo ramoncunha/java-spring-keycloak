@@ -1,8 +1,10 @@
 package com.ramon.myplayground.application.services;
 
 import com.ramon.myplayground.application.presentation.CarController;
-import com.ramon.myplayground.domain.models.CarEntity;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -10,21 +12,21 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service
 public class HateoasLinkService {
 
-    public void getOneLink(CarEntity carEntity) {
-        linkTo(methodOn(CarController.class)
-                .getOneCar(carEntity.getIdCar()))
+    public Link getOneLink(UUID id) {
+        return linkTo(methodOn(CarController.class)
+                .getOneCar(id))
                 .withSelfRel();
     }
 
-    public void getAllLink(CarEntity car) {
-        linkTo(methodOn(CarController.class)
+    public Link getAllLink() {
+        return linkTo(methodOn(CarController.class)
                 .getAllCars())
-                .withRel("Car List");
+                .withRel("List");
     }
 
-    public void deleteLink(CarEntity car) {
-        linkTo(methodOn(CarController.class)
-                .deleteCar(car.getIdCar()))
+    public Link deleteLink(UUID id) {
+        return linkTo(methodOn(CarController.class)
+                .deleteCar(id))
                 .withRel("Delete");
     }
 }

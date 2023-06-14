@@ -1,7 +1,18 @@
 package com.ramon.myplayground.domain.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public record Car(UUID idCar, String brand, String model, BigDecimal price) {
+@Getter
+@AllArgsConstructor
+public class Car extends RepresentationModel<Car>  {
+
+    private final UUID idCar;
+    private final String brand;
+    private final String model;
+    private final BigDecimal price;
 }

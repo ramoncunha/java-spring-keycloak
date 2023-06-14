@@ -18,7 +18,6 @@ import java.util.UUID;
 public class CarService implements ICarService {
 
     private final CarRepository carRepository;
-    private final HateoasLinkService hateoasLinkService;
 
     @Override
     public CarEntity save(CarRequest carRequest) {
@@ -28,9 +27,7 @@ public class CarService implements ICarService {
 
     @Override
     public List<CarEntity> findAll() {
-        List<CarEntity> carList = carRepository.findAll();
-        carList.forEach(hateoasLinkService::getOneLink);
-        return carList;
+        return carRepository.findAll();
     }
 
     @Override
@@ -39,10 +36,7 @@ public class CarService implements ICarService {
         if (carOptional.isEmpty()) {
             throw new CarNotFoundException();
         }
-        CarEntity car = carOptional.get();
-        hateoasLinkService.deleteLink(car);
-        hateoasLinkService.getAllLink(car);
-        return null;
+        return carOptional.get();
     }
 
     @Override
