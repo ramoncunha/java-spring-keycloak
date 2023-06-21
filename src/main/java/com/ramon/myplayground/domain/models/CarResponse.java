@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class Car extends RepresentationModel<Car>  {
+public class CarResponse extends RepresentationModel<CarResponse>  {
 
     private final UUID idCar;
     private final String brand;
