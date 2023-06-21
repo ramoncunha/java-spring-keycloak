@@ -1,11 +1,11 @@
-package com.ramon.myplayground.application.services;
+package com.ramon.myplayground.infrastructure.services;
 
 import com.ramon.myplayground.application.dtos.CarRequest;
 import com.ramon.myplayground.application.mappers.CarEntityMapper;
+import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
 import com.ramon.myplayground.domain.models.CarEntity;
 import com.ramon.myplayground.infrastructure.repositories.CarRepository;
-import com.ramon.myplayground.infrastructure.services.ICarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.ramon.myplayground.application.presentation;
 
 import com.ramon.myplayground.application.dtos.CarRequest;
 import com.ramon.myplayground.application.mappers.CarMapper;
-import com.ramon.myplayground.application.services.CarService;
 import com.ramon.myplayground.application.services.HateoasLinkService;
+import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.domain.models.Car;
 import com.ramon.myplayground.domain.models.CarEntity;
 import jakarta.validation.Valid;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CarController {
 
-    private final CarService carService;
+    private final ICarService carService;
     private final HateoasLinkService hateoasLinkService;
 
     @PostMapping("/car")
