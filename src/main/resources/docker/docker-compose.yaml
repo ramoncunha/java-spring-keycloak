@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    build:
+      context: ../../java
+    restart: always
+#    volumes:
+#      - ./database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"

@@ -1,4 +1,4 @@
-package com.ramon.myplayground.domain.models;
+package com.ramon.myplayground.application.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

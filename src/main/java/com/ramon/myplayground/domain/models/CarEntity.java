@@ -24,6 +24,9 @@ public class CarEntity {
     private String brand;
     private String model;
     private BigDecimal price;
+    private String color;
+    @Enumerated
+    private Fuel fuel;
     @CreationTimestamp
     private Instant createdAt;
     @UpdateTimestamp
