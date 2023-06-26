@@ -2,9 +2,9 @@ version: '3'
 
 services:
   postgres:
-    container_name: postgres
     build:
-      context: ../../java
+      context: .
+    container_name: postgres
     restart: always
 #    volumes:
 #      - ./database:/var/lib/postgresql/data
