@@ -1,7 +1,7 @@
-FROM postgres:latest
+FROM postgres:15-alpine
 
 LABEL author="Ramon Cunha"
-LABEL description="PostgresSQL Image for Car API"
+LABEL description="PostgreSQL Image for Car API"
 
 ENV POSTGRES_DB=car_api
 ENV POSTGRES_USER=postgres

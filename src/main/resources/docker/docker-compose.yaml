@@ -6,7 +6,7 @@ services:
       context: .
     container_name: postgres
     restart: always
-#    volumes:
-#      - ./database:/var/lib/postgresql/data
+    volumes:
+      - ./data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
