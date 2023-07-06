@@ -5,18 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_comments")
-public class CommentEntity {
+@Table(name = "tb_engine")
+public class EngineEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idCar;
-    @ManyToOne
-    private CarEntity car;
+    private UUID id;
+    private String description;
+    private String transmission;
+    private Integer horsePower;
+    @ManyToMany
+    private List<FuelEntity> fuel;
 }

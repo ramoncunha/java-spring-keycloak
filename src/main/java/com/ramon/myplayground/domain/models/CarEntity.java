@@ -15,29 +15,31 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_cars")
+@Table(name = "tb_car")
 public class CarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idCar;
+    private UUID id;
     private String brand;
     private String model;
     private BigDecimal price;
     private String color;
-    @Enumerated
-    private Fuel fuel;
+    @ManyToOne
+    private UserEntity seller;
+    @OneToOne
+    private EngineEntity engine;
     @CreationTimestamp
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
 
-    public void setIdCar(UUID idCar) {
-        this.idCar = idCar;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public UUID getIdCar() {
-        return idCar;
+    public UUID getId() {
+        return id;
     }
 
     public String getBrand() {

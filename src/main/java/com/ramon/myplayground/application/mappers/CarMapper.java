@@ -7,7 +7,7 @@ public class CarMapper {
 
     public static CarResponse fromCarEntity(CarEntity carEntity) {
         return new CarResponse(
-                carEntity.getIdCar(),
+                carEntity.getId(),
                 carEntity.getBrand(),
                 carEntity.getModel(),
                 carEntity.getPrice()
