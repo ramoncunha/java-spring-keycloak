@@ -17,13 +17,14 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/car")
 @RequiredArgsConstructor
 public class CarController {
 
     private final ICarService carService;
     private final HateoasLinkService hateoasLinkService;
 
-    @PostMapping("/car")
+    @PostMapping
     public ResponseEntity<CarResponse> saveCar(@RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.save(carRequest);
         CarResponse newCar = CarMapper.fromCarEntity(carEntity);
@@ -31,7 +32,7 @@ public class CarController {
                 .body(newCar);
     }
 
-    @GetMapping("/car")
+    @GetMapping
     public ResponseEntity<List<CarResponse>> getAllCars() {
         List<CarResponse> carResponseList = carService.findAll().stream()
                 .map(CarMapper::fromCarEntity)
@@ -41,7 +42,7 @@ public class CarController {
         return ResponseEntity.ok(carResponseList);
     }
 
-    @GetMapping("/car/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CarResponse> getOneCar(@PathVariable(value = "id") UUID id) {
         CarEntity carEntity = carService.findById(id);
         CarResponse car = CarMapper.fromCarEntity(carEntity);
@@ -50,14 +51,14 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
-    @PutMapping("/car/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CarResponse> updateCar(@PathVariable(value = "id") UUID id,
                                                  @RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.update(id, carRequest);
         return ResponseEntity.ok(CarMapper.fromCarEntity(carEntity));
     }
 
-    @DeleteMapping("/car/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCar(@PathVariable(value = "id")UUID id) {
         carService.delete(id);
         return ResponseEntity.ok("Product deleted successfully!");

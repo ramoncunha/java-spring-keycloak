@@ -1,4 +1,6 @@
 package com.ramon.myplayground.application.dtos;
 
-public record UserRequest(String name, String email) {
+import jakarta.validation.constraints.NotBlank;
+
+public record UserRequest(@NotBlank String name, @NotBlank String email) {
 }

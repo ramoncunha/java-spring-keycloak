@@ -1,0 +1,3 @@
+keycloak:
+  realm: car-realm
+  host: http://localhost:8443
