@@ -21,6 +21,5 @@ public class EngineEntity {
     private String description;
     private String transmission;
     private Integer horsePower;
-    @ManyToMany
-    private List<FuelEntity> fuel;
+    private List<Fuel> fuel;
 }

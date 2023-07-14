@@ -1,7 +1,7 @@
 package com.ramon.myplayground.application.presentation;
 
 import com.ramon.myplayground.application.dtos.CarRequest;
-import com.ramon.myplayground.application.mappers.CarMapper;
+import com.ramon.myplayground.application.mappers.CarResponseMapper;
 import com.ramon.myplayground.application.services.HateoasLinkService;
 import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.application.dtos.CarResponse;
@@ -27,7 +27,7 @@ public class CarController {
     @PostMapping
     public ResponseEntity<CarResponse> saveCar(@RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.save(carRequest);
-        CarResponse newCar = CarMapper.fromCarEntity(carEntity);
+        CarResponse newCar = CarResponseMapper.fromCarEntity(carEntity);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newCar);
     }
@@ -35,7 +35,7 @@ public class CarController {
     @GetMapping
     public ResponseEntity<List<CarResponse>> getAllCars() {
         List<CarResponse> carResponseList = carService.findAll().stream()
-                .map(CarMapper::fromCarEntity)
+                .map(CarResponseMapper::fromCarEntity)
                 .peek(car -> car.add(
                         hateoasLinkService.getOneLink(car.getIdCar()))
                 ).collect(Collectors.toList());
@@ -45,7 +45,7 @@ public class CarController {
     @GetMapping("/{id}")
     public ResponseEntity<CarResponse> getOneCar(@PathVariable(value = "id") UUID id) {
         CarEntity carEntity = carService.findById(id);
-        CarResponse car = CarMapper.fromCarEntity(carEntity);
+        CarResponse car = CarResponseMapper.fromCarEntity(carEntity);
         car.add(hateoasLinkService.getAllLink());
         car.add(hateoasLinkService.deleteLink(car.getIdCar()));
         return ResponseEntity.ok(car);
@@ -55,7 +55,7 @@ public class CarController {
     public ResponseEntity<CarResponse> updateCar(@PathVariable(value = "id") UUID id,
                                                  @RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.update(id, carRequest);
-        return ResponseEntity.ok(CarMapper.fromCarEntity(carEntity));
+        return ResponseEntity.ok(CarResponseMapper.fromCarEntity(carEntity));
     }
 
     @DeleteMapping("/{id}")
