@@ -21,5 +21,6 @@ public class EngineEntity {
     private String description;
     private String transmission;
     private Integer horsePower;
+    private Double kilometers;
     private List<Fuel> fuel;
 }

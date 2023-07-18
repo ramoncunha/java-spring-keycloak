@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.Year;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +26,8 @@ public class CarEntity {
     private UUID id;
     private String make;
     private String model;
+    private Year yearMake;
+    private Year yearModel;
     private BigDecimal price;
     private String color;
     @ManyToOne(fetch = FetchType.LAZY)
