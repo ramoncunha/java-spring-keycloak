@@ -32,7 +32,7 @@ public class CarEntity {
     private String color;
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     private EngineEntity engine;
     @CreationTimestamp
     private Instant createdAt;
