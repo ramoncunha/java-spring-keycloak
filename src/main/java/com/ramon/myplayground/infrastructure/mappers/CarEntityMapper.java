@@ -1,6 +1,6 @@
-package com.ramon.myplayground.application.mappers;
+package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.dtos.CarRequest;
+import com.ramon.myplayground.infrastructure.dtos.CarRequest;
 import com.ramon.myplayground.domain.models.CarEntity;
 
 public class CarEntityMapper {

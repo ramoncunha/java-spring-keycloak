@@ -1,7 +1,7 @@
 package com.ramon.myplayground.application.presentation;
 
-import com.ramon.myplayground.application.dtos.UserRequest;
-import com.ramon.myplayground.application.dtos.UserResponse;
+import com.ramon.myplayground.infrastructure.dtos.UserRequest;
+import com.ramon.myplayground.infrastructure.dtos.UserResponse;
 import com.ramon.myplayground.application.services.IUserService;
 import com.ramon.myplayground.domain.models.UserEntity;
 import jakarta.validation.Valid;

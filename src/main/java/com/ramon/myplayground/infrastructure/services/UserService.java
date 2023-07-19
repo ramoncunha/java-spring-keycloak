@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.services;
 
-import com.ramon.myplayground.application.dtos.UserRequest;
+import com.ramon.myplayground.infrastructure.dtos.UserRequest;
 import com.ramon.myplayground.application.services.IUserService;
 import com.ramon.myplayground.domain.models.UserEntity;
 import com.ramon.myplayground.infrastructure.repositories.UserRepository;

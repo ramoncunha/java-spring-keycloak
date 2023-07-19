@@ -1,4 +1,4 @@
-package com.ramon.myplayground.application.mappers;
+package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.domain.models.UserEntity;
 

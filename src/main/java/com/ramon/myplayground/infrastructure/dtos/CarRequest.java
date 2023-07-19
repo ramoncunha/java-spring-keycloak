@@ -1,4 +1,4 @@
-package com.ramon.myplayground.application.dtos;
+package com.ramon.myplayground.infrastructure.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

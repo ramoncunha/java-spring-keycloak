@@ -1,4 +1,4 @@
-package com.ramon.myplayground.application.dtos;
+package com.ramon.myplayground.infrastructure.dtos;
 
 import com.ramon.myplayground.domain.models.Fuel;
 

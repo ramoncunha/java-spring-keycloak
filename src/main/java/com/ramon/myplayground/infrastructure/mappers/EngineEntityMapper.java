@@ -1,6 +1,6 @@
-package com.ramon.myplayground.application.mappers;
+package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.dtos.EngineRequest;
+import com.ramon.myplayground.infrastructure.dtos.EngineRequest;
 import com.ramon.myplayground.domain.models.EngineEntity;
 
 public class EngineEntityMapper {
