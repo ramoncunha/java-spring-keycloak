@@ -10,7 +10,11 @@ public class CarResponseMapper {
                 carEntity.getId(),
                 carEntity.getMake(),
                 carEntity.getModel(),
-                carEntity.getPrice()
+                carEntity.getYearMake(),
+                carEntity.getYearModel(),
+                carEntity.getPrice(),
+                carEntity.getColor(),
+                EngineResponseMapper.fromEngineEntity(carEntity.getEngine())
         );
     }
 }
