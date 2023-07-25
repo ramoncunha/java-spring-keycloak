@@ -2,10 +2,12 @@ package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.infrastructure.dtos.CarResponse;
 import com.ramon.myplayground.domain.models.CarEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CarResponseMapper {
 
-    public static CarResponse fromCarEntity(CarEntity carEntity) {
+    public CarResponse fromCarEntity(CarEntity carEntity) {
         return new CarResponse(
                 carEntity.getId(),
                 carEntity.getMake(),

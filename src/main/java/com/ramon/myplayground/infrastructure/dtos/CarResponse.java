@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CarResponse extends RepresentationModel<CarResponse>  {
 
-    private final UUID idCar;
+    private final UUID id;
     private final String make;
     private final String model;
     private Year yearMake;

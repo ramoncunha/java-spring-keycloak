@@ -23,11 +23,12 @@ public class CarController {
 
     private final ICarService carService;
     private final HateoasLinkService hateoasLinkService;
+    private final CarResponseMapper carResponseMapper;
 
     @PostMapping
     public ResponseEntity<CarResponse> saveCar(@RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.save(carRequest);
-        CarResponse newCar = CarResponseMapper.fromCarEntity(carEntity);
+        CarResponse newCar = carResponseMapper.fromCarEntity(carEntity);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newCar);
     }
@@ -35,9 +36,9 @@ public class CarController {
     @GetMapping
     public ResponseEntity<List<CarResponse>> getAllCars() {
         List<CarResponse> carResponseList = carService.findAll().stream()
-                .map(CarResponseMapper::fromCarEntity)
+                .map(carResponseMapper::fromCarEntity)
                 .peek(car -> car.add(
-                        hateoasLinkService.getOneLink(car.getIdCar()))
+                        hateoasLinkService.getOneLink(car.getId()))
                 ).collect(Collectors.toList());
         return ResponseEntity.ok(carResponseList);
     }
@@ -45,9 +46,9 @@ public class CarController {
     @GetMapping("/{id}")
     public ResponseEntity<CarResponse> getOneCar(@PathVariable(value = "id") UUID id) {
         CarEntity carEntity = carService.findById(id);
-        CarResponse car = CarResponseMapper.fromCarEntity(carEntity);
+        CarResponse car = carResponseMapper.fromCarEntity(carEntity);
         car.add(hateoasLinkService.getAllLink());
-        car.add(hateoasLinkService.deleteLink(car.getIdCar()));
+        car.add(hateoasLinkService.deleteLink(car.getId()));
         return ResponseEntity.ok(car);
     }
 
@@ -55,12 +56,12 @@ public class CarController {
     public ResponseEntity<CarResponse> updateCar(@PathVariable(value = "id") UUID id,
                                                  @RequestBody @Valid CarRequest carRequest) {
         CarEntity carEntity = carService.update(id, carRequest);
-        return ResponseEntity.ok(CarResponseMapper.fromCarEntity(carEntity));
+        return ResponseEntity.ok(carResponseMapper.fromCarEntity(carEntity));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCar(@PathVariable(value = "id")UUID id) {
+    public ResponseEntity<Void> deleteCar(@PathVariable(value = "id") UUID id) {
         carService.delete(id);
-        return ResponseEntity.ok("Product deleted successfully!");
+        return ResponseEntity.ok().build();
     }
 }
