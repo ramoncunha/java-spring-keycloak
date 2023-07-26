@@ -1,4 +1,4 @@
-package com.ramon.myplayground.domain.models;
+package com.ramon.myplayground.infrastructure.repositories.models;
 
 import jakarta.persistence.*;
 

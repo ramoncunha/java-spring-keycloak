@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.domain.models.UserEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
 
 import java.util.UUID;
 

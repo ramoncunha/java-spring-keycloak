@@ -4,7 +4,7 @@ import com.ramon.myplayground.infrastructure.dtos.CarRequest;
 import com.ramon.myplayground.infrastructure.mappers.CarEntityMapper;
 import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
-import com.ramon.myplayground.domain.models.CarEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import com.ramon.myplayground.infrastructure.repositories.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

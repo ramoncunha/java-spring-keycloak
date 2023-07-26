@@ -1,7 +1,7 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.infrastructure.dtos.EngineResponse;
-import com.ramon.myplayground.domain.models.EngineEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 
 import java.util.stream.Collectors;
 

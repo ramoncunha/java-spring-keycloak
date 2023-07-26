@@ -1,7 +1,7 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.infrastructure.dtos.CarResponse;
-import com.ramon.myplayground.domain.models.CarEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import org.springframework.stereotype.Component;
 
 @Component

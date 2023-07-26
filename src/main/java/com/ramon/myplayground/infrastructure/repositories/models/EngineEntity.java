@@ -1,5 +1,6 @@
-package com.ramon.myplayground.domain.models;
+package com.ramon.myplayground.infrastructure.repositories.models;
 
+import com.ramon.myplayground.domain.models.Fuel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

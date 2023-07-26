@@ -1,7 +1,7 @@
 package com.ramon.myplayground.application.services;
 
 import com.ramon.myplayground.infrastructure.dtos.CarRequest;
-import com.ramon.myplayground.domain.models.CarEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 
 import java.util.List;
 import java.util.UUID;

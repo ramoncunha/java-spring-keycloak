@@ -1,7 +1,7 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.infrastructure.dtos.EngineRequest;
-import com.ramon.myplayground.domain.models.EngineEntity;
+import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 
 public class EngineEntityMapper {
 
