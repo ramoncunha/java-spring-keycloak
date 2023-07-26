@@ -6,6 +6,7 @@ import com.ramon.myplayground.application.services.IUserService;
 import com.ramon.myplayground.domain.models.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> saveUser(@RequestBody @Valid UserRequest userRequest) {
         UserEntity user = userService.save(userRequest);
-        return ResponseEntity.ok(new UserResponse(user.getId(), user.getName(), user.getEmail()));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new UserResponse(user.getId(), user.getName(), user.getEmail()));
     }
 }
