@@ -1,4 +1,4 @@
-package com.ramon.myplayground.infrastructure.dtos;
+package com.ramon.myplayground.application.presentation.dtos;
 
 import lombok.Builder;
 

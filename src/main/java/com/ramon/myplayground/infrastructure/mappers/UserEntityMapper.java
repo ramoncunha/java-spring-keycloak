@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class UserEntityMapper {
 
-    public static UserEntity fromRequest(String id) {
+    public static UserEntity map(String id) {
         return UserEntity.builder()
                 .id(UUID.fromString(id))
                 .build();

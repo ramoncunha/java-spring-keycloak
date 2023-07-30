@@ -1,13 +1,15 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.infrastructure.dtos.EngineResponse;
+import com.ramon.myplayground.application.presentation.dtos.EngineResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@Component
 public class EngineResponseMapper {
 
-    public static EngineResponse fromEngineEntity(EngineEntity engine) {
+    public EngineResponse map(EngineEntity engine) {
         return new EngineResponse(
                 engine.getDescription(),
                 engine.getTransmission(),

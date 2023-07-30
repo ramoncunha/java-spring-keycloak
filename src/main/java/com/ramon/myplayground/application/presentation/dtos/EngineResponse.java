@@ -1,4 +1,4 @@
-package com.ramon.myplayground.infrastructure.dtos;
+package com.ramon.myplayground.application.presentation.dtos;
 
 public record EngineResponse(String description,
                              String transmission,

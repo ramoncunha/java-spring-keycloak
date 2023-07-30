@@ -2,8 +2,8 @@ package com.ramon.myplayground.application.presentation;
 
 import com.ramon.myplayground.application.services.IUserService;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
-import com.ramon.myplayground.infrastructure.dtos.UserRequest;
-import com.ramon.myplayground.infrastructure.dtos.UserResponse;
+import com.ramon.myplayground.application.presentation.dtos.UserRequest;
+import com.ramon.myplayground.application.presentation.dtos.UserResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

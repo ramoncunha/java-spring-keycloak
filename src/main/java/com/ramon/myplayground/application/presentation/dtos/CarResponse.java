@@ -1,4 +1,4 @@
-package com.ramon.myplayground.infrastructure.dtos;
+package com.ramon.myplayground.application.presentation.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,4 +20,5 @@ public class CarResponse extends RepresentationModel<CarResponse>  {
     private final BigDecimal price;
     private String color;
     private EngineResponse engine;
+    private UserResponse user;
 }

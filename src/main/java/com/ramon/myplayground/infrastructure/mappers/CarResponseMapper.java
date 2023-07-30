@@ -1,13 +1,18 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.infrastructure.dtos.CarResponse;
+import com.ramon.myplayground.application.presentation.dtos.CarResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CarResponseMapper {
 
-    public CarResponse fromCarEntity(CarEntity carEntity) {
+    private final EngineResponseMapper engineMapper;
+    private final UserResponseMapper userMapper;
+
+    public CarResponse map(CarEntity carEntity) {
         return new CarResponse(
                 carEntity.getId(),
                 carEntity.getMake(),
@@ -16,7 +21,8 @@ public class CarResponseMapper {
                 carEntity.getYearModel(),
                 carEntity.getPrice(),
                 carEntity.getColor(),
-                EngineResponseMapper.fromEngineEntity(carEntity.getEngine())
+                engineMapper.map(carEntity.getEngine()),
+                userMapper.map(carEntity.getUser())
         );
     }
 }

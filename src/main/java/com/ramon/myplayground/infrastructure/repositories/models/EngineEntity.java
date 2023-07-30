@@ -25,5 +25,6 @@ public class EngineEntity {
     private String transmission;
     private Integer horsePower;
     private Double kilometers;
+    @Enumerated(EnumType.STRING)
     private List<Fuel> fuel;
 }

@@ -1,11 +1,11 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.infrastructure.dtos.EngineRequest;
+import com.ramon.myplayground.application.presentation.dtos.EngineRequest;
 import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 
 public class EngineEntityMapper {
 
-    public static EngineEntity fromEngineRequest(EngineRequest engine) {
+    public static EngineEntity map(EngineRequest engine) {
         return EngineEntity.builder()
                 .description(engine.description())
                 .transmission(engine.transmission())

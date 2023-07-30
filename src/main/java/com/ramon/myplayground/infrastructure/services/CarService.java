@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.services;
 
-import com.ramon.myplayground.infrastructure.dtos.CarRequest;
+import com.ramon.myplayground.application.presentation.dtos.CarRequest;
 import com.ramon.myplayground.infrastructure.mappers.CarEntityMapper;
 import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
@@ -21,7 +21,7 @@ public class CarService implements ICarService {
 
     @Override
     public CarEntity save(CarRequest carRequest) {
-        CarEntity carToSave = CarEntityMapper.fromCarRequest(carRequest);
+        CarEntity carToSave = CarEntityMapper.map(carRequest);
         return carRepository.save(carToSave);
     }
 

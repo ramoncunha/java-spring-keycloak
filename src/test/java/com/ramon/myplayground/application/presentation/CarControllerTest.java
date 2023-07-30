@@ -3,8 +3,8 @@ package com.ramon.myplayground.application.presentation;
 import com.ramon.myplayground.application.services.HateoasLinkService;
 import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
-import com.ramon.myplayground.infrastructure.dtos.CarRequest;
-import com.ramon.myplayground.infrastructure.dtos.CarResponse;
+import com.ramon.myplayground.application.presentation.dtos.CarRequest;
+import com.ramon.myplayground.application.presentation.dtos.CarResponse;
 import com.ramon.myplayground.infrastructure.mappers.CarResponseMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class CarControllerTest {
         var expected = Mockito.mock(CarResponse.class);
 
         Mockito.when(carService.save(request)).thenReturn(entity);
-        Mockito.when(carResponseMapper.fromCarEntity(entity)).thenReturn(expected);
+        Mockito.when(carResponseMapper.map(entity)).thenReturn(expected);
 
         ResponseEntity<CarResponse> actual = unit.saveCar(request);
 
@@ -57,7 +57,7 @@ class CarControllerTest {
         var UUIDMock = Mockito.mock(UUID.class);
 
         Mockito.when(carService.findAll()).thenReturn(entities);
-        Mockito.when(carResponseMapper.fromCarEntity(entity)).thenReturn(response);
+        Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
         Mockito.when(response.getId()).thenReturn(UUIDMock);
         Mockito.when(hateoasLinkService.getOneLink(UUIDMock)).thenReturn(hateoasLink);
 
@@ -78,7 +78,7 @@ class CarControllerTest {
         var UUIDMock = Mockito.mock(UUID.class);
 
         Mockito.when(carService.findById(UUIDMock)).thenReturn(entity);
-        Mockito.when(carResponseMapper.fromCarEntity(entity)).thenReturn(response);
+        Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
         Mockito.when(response.getId()).thenReturn(UUIDMock);
         Mockito.when(hateoasLinkService.deleteLink(UUIDMock)).thenReturn(hateoasLink);
 
@@ -98,7 +98,7 @@ class CarControllerTest {
         var UUIDMock = Mockito.mock(UUID.class);
 
         Mockito.when(carService.update(UUIDMock, request)).thenReturn(entity);
-        Mockito.when(carResponseMapper.fromCarEntity(entity)).thenReturn(response);
+        Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
 
         ResponseEntity<CarResponse> actual = unit.updateCar(UUIDMock, request);
 
