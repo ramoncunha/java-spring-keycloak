@@ -18,10 +18,11 @@ import java.util.UUID;
 public class CarService implements ICarService {
 
     private final CarRepository carRepository;
+    private final CarEntityMapper carEntityMapper;
 
     @Override
     public CarEntity save(CarRequest carRequest) {
-        CarEntity carToSave = CarEntityMapper.map(carRequest);
+        CarEntity carToSave = carEntityMapper.map(carRequest);
         return carRepository.save(carToSave);
     }
 

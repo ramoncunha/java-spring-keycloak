@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface CarRepository extends JpaRepository<CarEntity, UUID> {
 
     @Override
-    @EntityGraph(attributePaths = {"engine"})
+    @EntityGraph(attributePaths = {"user", "engine"})
     List<CarEntity> findAll();
 }

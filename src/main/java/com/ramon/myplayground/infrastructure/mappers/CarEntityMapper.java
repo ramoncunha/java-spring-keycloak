@@ -2,10 +2,17 @@ package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.application.presentation.dtos.CarRequest;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class CarEntityMapper {
 
-    public static CarEntity map(CarRequest carRequest) {
+    private final UserEntityMapper userEntityMapper;
+    private final EngineEntityMapper engineEntityMapper;
+
+    public CarEntity map(CarRequest carRequest) {
         return CarEntity.builder()
                 .make(carRequest.make())
                 .model(carRequest.model())
@@ -13,8 +20,8 @@ public class CarEntityMapper {
                 .yearModel(carRequest.yearModel())
                 .price(carRequest.price())
                 .color(carRequest.color())
-                .user(UserEntityMapper.map(carRequest.userId()))
-                .engine(EngineEntityMapper.map(carRequest.engineRequest()))
+                .user(userEntityMapper.map(carRequest.userId()))
+                .engine(engineEntityMapper.map(carRequest.engineRequest()))
                 .build();
     }
 }
