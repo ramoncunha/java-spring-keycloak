@@ -1,11 +1,11 @@
 package com.ramon.myplayground.infrastructure.services;
 
 import com.ramon.myplayground.application.presentation.dtos.CarRequest;
-import com.ramon.myplayground.infrastructure.mappers.CarEntityMapper;
 import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
-import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
+import com.ramon.myplayground.infrastructure.mappers.CarEntityMapper;
 import com.ramon.myplayground.infrastructure.repositories.CarRepository;
+import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,10 +52,6 @@ public class CarService implements ICarService {
 
     @Override
     public void delete(UUID id) {
-        Optional<CarEntity> carOptional = carRepository.findById(id);
-        if (carOptional.isEmpty()) {
-            throw new CarNotFoundException();
-        }
         carRepository.deleteById(id);
     }
 }
