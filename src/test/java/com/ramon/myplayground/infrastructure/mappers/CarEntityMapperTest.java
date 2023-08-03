@@ -2,7 +2,6 @@ package com.ramon.myplayground.infrastructure.mappers;
 
 import com.ramon.myplayground.application.presentation.dtos.CarRequest;
 import com.ramon.myplayground.application.presentation.dtos.EngineRequest;
-import com.ramon.myplayground.domain.models.Fuel;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.Year;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class CarEntityMapperTest {
@@ -30,11 +28,7 @@ class CarEntityMapperTest {
 
     @Test
     void map_givenCarRequest_shouldReturnCarEntity() {
-        var engineRequest = new EngineRequest("Turbo",
-                "Automatic",
-                189,
-                20_000D,
-                List.of(Fuel.GASOLINE, Fuel.ETHANOL));
+        var engineRequest = Mockito.mock(EngineRequest.class);
         var carRequest = new CarRequest("Volkswagen",
                 "Nivus",
                 Year.of(2023),

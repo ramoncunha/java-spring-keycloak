@@ -1,10 +1,10 @@
 package com.ramon.myplayground.application.presentation;
 
 import com.ramon.myplayground.application.presentation.dtos.CarRequest;
-import com.ramon.myplayground.infrastructure.mappers.CarResponseMapper;
+import com.ramon.myplayground.application.presentation.dtos.CarResponse;
 import com.ramon.myplayground.application.services.HateoasLinkService;
 import com.ramon.myplayground.application.services.ICarService;
-import com.ramon.myplayground.application.presentation.dtos.CarResponse;
+import com.ramon.myplayground.infrastructure.mappers.CarResponseMapper;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/car")
@@ -35,12 +34,11 @@ public class CarController {
 
     @GetMapping
     public ResponseEntity<List<CarResponse>> getAllCars() {
-        List<CarResponse> carResponseList = carService.findAll().stream()
+        List<CarResponse> carResponse = carService.findAll().stream()
                 .map(carResponseMapper::map)
-                .peek(car -> car.add(
-                        hateoasLinkService.getOneLink(car.getId()))
-                ).collect(Collectors.toList());
-        return ResponseEntity.ok(carResponseList);
+                .toList();
+        carResponse.forEach(car -> car.add(hateoasLinkService.getOneLink(car.getId())));
+        return ResponseEntity.ok(carResponse);
     }
 
     @GetMapping("/{id}")

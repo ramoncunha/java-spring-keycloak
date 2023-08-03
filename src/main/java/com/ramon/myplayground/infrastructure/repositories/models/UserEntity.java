@@ -1,6 +1,5 @@
 package com.ramon.myplayground.infrastructure.repositories.models;
 
-import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
