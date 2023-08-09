@@ -1,0 +1,7 @@
+FROM eclipse-temurin:17-jdk-jammy
+
+WORKDIR /app
+EXPOSE 8080
+COPY ./myplayground-0.0.1-SNAPSHOT.jar ./car-api.jar
+
+ENTRYPOINT ["java", "-jar", "car-api.jar"]

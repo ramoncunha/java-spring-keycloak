@@ -1,10 +1,19 @@
 version: '3'
 
 services:
+  api:
+    container_name: car-api
+    image: ramoncunha/carapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - car-network
+
   postgres:
-    build:
-      context: .
     container_name: postgres
+    image: ramoncunha/carapi-postgres
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
