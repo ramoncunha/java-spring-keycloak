@@ -4,6 +4,12 @@ services:
   api:
     container_name: car-api
     image: ramoncunha/carapi
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/car_api
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=pgsql
+      - keycloak.realm=car-realm
+      - keycloak.host=http://keycloak:8443
     ports:
       - "8080:8080"
     depends_on:
@@ -14,7 +20,16 @@ services:
 
   postgres:
     container_name: postgres
-    image: ramoncunha/carapi-postgres
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=car_api
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgsql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d car_api -U postgres"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
@@ -38,3 +53,4 @@ services:
 
 networks:
   car-network:
+    driver: bridge
