@@ -1,12 +1,29 @@
 package com.ramon.myplayground.domain.exceptions;
 
+import com.ramon.myplayground.infrastructure.configuration.ProblemDetails;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class CarNotFoundException extends RuntimeException {
+import java.net.URI;
 
-    public CarNotFoundException() {
-        super("Car not found!");
+public class CarNotFoundException extends RuntimeException implements ProblemDetails {
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Car not found";
+    }
+
+    @Override
+    public String getDetail() {
+        return "Car not found";
+    }
+
+    @Override
+    public URI getType() {
+        return URI.create("any");
     }
 }
