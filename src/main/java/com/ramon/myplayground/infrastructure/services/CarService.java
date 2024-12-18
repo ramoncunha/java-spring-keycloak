@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -33,21 +32,16 @@ public class CarService implements ICarService {
 
     @Override
     public CarEntity findById(UUID id) {
-        Optional<CarEntity> carOptional = carRepository.findById(id);
-        if (carOptional.isEmpty()) {
-            throw new CarNotFoundException();
-        }
-        return carOptional.get();
+        return carRepository.findById(id).orElseThrow(CarNotFoundException::new);
     }
 
     @Override
     public CarEntity update(UUID id, CarRequest carRequest) {
-        Optional<CarEntity> carOptional = carRepository.findById(id);
-        if (carOptional.isEmpty()) {
+        if (!carRepository.existsById(id)) {
             throw new CarNotFoundException();
         }
-        CarEntity car = carOptional.get();
-        return carRepository.save(car);
+        CarEntity carToUpdate = carEntityMapper.map(carRequest);
+        return carRepository.save(carToUpdate);
     }
 
     @Override

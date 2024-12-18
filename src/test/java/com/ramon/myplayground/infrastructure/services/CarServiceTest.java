@@ -62,7 +62,6 @@ class CarServiceTest {
 
     @Test
     void findById_givenIdUnavailable_shouldThrowException() {
-        var car = Mockito.mock(CarEntity.class);
         var id = UUID.fromString("8224f0a2-7df0-4ed1-81ce-11a5f0839e8f");
         Mockito.when(carRepository.findById(id)).thenReturn(Optional.empty());
 

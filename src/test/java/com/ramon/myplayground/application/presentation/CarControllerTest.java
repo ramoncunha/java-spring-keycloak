@@ -1,11 +1,11 @@
 package com.ramon.myplayground.application.presentation;
 
-import com.ramon.myplayground.application.services.HateoasLinkService;
-import com.ramon.myplayground.application.services.ICarService;
-import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import com.ramon.myplayground.application.presentation.dtos.CarRequest;
 import com.ramon.myplayground.application.presentation.dtos.CarResponse;
+import com.ramon.myplayground.application.services.HateoasLinkService;
+import com.ramon.myplayground.application.services.ICarService;
 import com.ramon.myplayground.infrastructure.mappers.CarResponseMapper;
+import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,12 +54,12 @@ class CarControllerTest {
         var entities = Collections.singletonList(entity);
         var response = Mockito.mock(CarResponse.class);
         var hateoasLink = Mockito.mock(Link.class);
-        var UUIDMock = Mockito.mock(UUID.class);
+        var uuidMock = Mockito.mock(UUID.class);
 
         Mockito.when(carService.findAll()).thenReturn(entities);
         Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
-        Mockito.when(response.getId()).thenReturn(UUIDMock);
-        Mockito.when(hateoasLinkService.getOneLink(UUIDMock)).thenReturn(hateoasLink);
+        Mockito.when(response.getId()).thenReturn(uuidMock);
+        Mockito.when(hateoasLinkService.getOneLink(uuidMock)).thenReturn(hateoasLink);
 
         ResponseEntity<List<CarResponse>> actual = unit.getAllCars();
 
@@ -67,7 +67,7 @@ class CarControllerTest {
 
         Assertions.assertThat(actual.getBody()).isEqualTo(expected);
         Assertions.assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Mockito.verify(hateoasLinkService, Mockito.times(1)).getOneLink(UUIDMock);
+        Mockito.verify(hateoasLinkService, Mockito.times(1)).getOneLink(uuidMock);
     }
 
     @Test
@@ -75,19 +75,19 @@ class CarControllerTest {
         var entity = Mockito.mock(CarEntity.class);
         var response = Mockito.mock(CarResponse.class);
         var hateoasLink = Mockito.mock(Link.class);
-        var UUIDMock = Mockito.mock(UUID.class);
+        var uuidMock = Mockito.mock(UUID.class);
 
-        Mockito.when(carService.findById(UUIDMock)).thenReturn(entity);
+        Mockito.when(carService.findById(uuidMock)).thenReturn(entity);
         Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
-        Mockito.when(response.getId()).thenReturn(UUIDMock);
-        Mockito.when(hateoasLinkService.deleteLink(UUIDMock)).thenReturn(hateoasLink);
+        Mockito.when(response.getId()).thenReturn(uuidMock);
+        Mockito.when(hateoasLinkService.deleteLink(uuidMock)).thenReturn(hateoasLink);
 
-        ResponseEntity<CarResponse> actual = unit.getOneCar(UUIDMock);
+        ResponseEntity<CarResponse> actual = unit.getOneCar(uuidMock);
 
         Assertions.assertThat(actual.getBody()).isEqualTo(response);
         Assertions.assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
         Mockito.verify(hateoasLinkService, Mockito.times(1)).getAllLink();
-        Mockito.verify(hateoasLinkService, Mockito.times(1)).deleteLink(UUIDMock);
+        Mockito.verify(hateoasLinkService, Mockito.times(1)).deleteLink(uuidMock);
     }
 
     @Test
@@ -95,12 +95,12 @@ class CarControllerTest {
         var entity = Mockito.mock(CarEntity.class);
         var request = Mockito.mock(CarRequest.class);
         var response = Mockito.mock(CarResponse.class);
-        var UUIDMock = Mockito.mock(UUID.class);
+        var uuidMock = Mockito.mock(UUID.class);
 
-        Mockito.when(carService.update(UUIDMock, request)).thenReturn(entity);
+        Mockito.when(carService.update(uuidMock, request)).thenReturn(entity);
         Mockito.when(carResponseMapper.map(entity)).thenReturn(response);
 
-        ResponseEntity<CarResponse> actual = unit.updateCar(UUIDMock, request);
+        ResponseEntity<CarResponse> actual = unit.updateCar(uuidMock, request);
 
         Assertions.assertThat(actual.getBody()).isEqualTo(response);
         Assertions.assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -108,10 +108,10 @@ class CarControllerTest {
 
     @Test
     void deleteCar_givenValidId_shouldDeleteCar() {
-        var UUIDMock = Mockito.mock(UUID.class);
+        var uuidMock = Mockito.mock(UUID.class);
 
-        unit.deleteCar(UUIDMock);
+        unit.deleteCar(uuidMock);
 
-        Mockito.verify(carService, Mockito.times(1)).delete(UUIDMock);
+        Mockito.verify(carService, Mockito.times(1)).delete(uuidMock);
     }
 }
