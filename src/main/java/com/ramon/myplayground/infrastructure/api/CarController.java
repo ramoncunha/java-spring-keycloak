@@ -1,10 +1,10 @@
-package com.ramon.myplayground.application.presentation;
+package com.ramon.myplayground.infrastructure.api;
 
-import com.ramon.myplayground.application.presentation.dtos.CarRequest;
-import com.ramon.myplayground.application.presentation.dtos.CarResponse;
-import com.ramon.myplayground.application.services.HateoasLinkService;
-import com.ramon.myplayground.application.services.ICarService;
+import com.ramon.myplayground.domain.ICarService;
+import com.ramon.myplayground.infrastructure.HateoasLinkService;
 import com.ramon.myplayground.infrastructure.mappers.CarResponseMapper;
+import com.ramon.myplayground.infrastructure.models.CarRequest;
+import com.ramon.myplayground.infrastructure.models.CarResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

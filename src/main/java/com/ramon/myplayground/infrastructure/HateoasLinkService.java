@@ -1,6 +1,6 @@
-package com.ramon.myplayground.application.services;
+package com.ramon.myplayground.infrastructure;
 
-import com.ramon.myplayground.application.presentation.CarController;
+import com.ramon.myplayground.infrastructure.api.CarController;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 

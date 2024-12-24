@@ -98,9 +98,9 @@ public class SecurityConfig {
                     };
 
             final Function<Set<Map.Entry<String, Object>>, Collection<String>> mapResource =
-                resources -> resources.stream()
-                        .flatMap(mapResources)
-                        .toList();
+                    resources -> resources.stream()
+                            .flatMap(mapResources)
+                            .toList();
 
             return Optional.ofNullable(jwt.getClaimAsMap("resource_access"))
                     .map(resources -> resources.entrySet())

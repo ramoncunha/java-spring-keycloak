@@ -1,6 +1,6 @@
-package com.ramon.myplayground.application.services;
+package com.ramon.myplayground.domain;
 
-import com.ramon.myplayground.application.presentation.dtos.CarRequest;
+import com.ramon.myplayground.infrastructure.models.CarRequest;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 
 import java.util.List;

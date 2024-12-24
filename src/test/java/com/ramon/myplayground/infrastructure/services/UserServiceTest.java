@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.services;
 
-import com.ramon.myplayground.application.presentation.dtos.UserRequest;
+import com.ramon.myplayground.infrastructure.models.UserRequest;
 import com.ramon.myplayground.infrastructure.repositories.UserRepository;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
 import org.assertj.core.api.Assertions;

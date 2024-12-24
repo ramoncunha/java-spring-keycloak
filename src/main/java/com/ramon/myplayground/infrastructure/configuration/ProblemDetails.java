@@ -7,7 +7,10 @@ import java.net.URI;
 public interface ProblemDetails {
 
     HttpStatus getStatus();
+
     String getTitle();
+
     String getDetail();
+
     URI getType();
 }

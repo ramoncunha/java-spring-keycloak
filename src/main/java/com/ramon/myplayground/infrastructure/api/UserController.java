@@ -1,8 +1,8 @@
-package com.ramon.myplayground.application.presentation;
+package com.ramon.myplayground.infrastructure.api;
 
-import com.ramon.myplayground.application.presentation.dtos.UserRequest;
-import com.ramon.myplayground.application.presentation.dtos.UserResponse;
-import com.ramon.myplayground.application.services.IUserService;
+import com.ramon.myplayground.domain.IUserService;
+import com.ramon.myplayground.infrastructure.models.UserRequest;
+import com.ramon.myplayground.infrastructure.models.UserResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

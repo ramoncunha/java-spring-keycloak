@@ -1,8 +1,8 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.presentation.dtos.CarResponse;
-import com.ramon.myplayground.application.presentation.dtos.EngineResponse;
-import com.ramon.myplayground.application.presentation.dtos.UserResponse;
+import com.ramon.myplayground.infrastructure.models.CarResponse;
+import com.ramon.myplayground.infrastructure.models.EngineResponse;
+import com.ramon.myplayground.infrastructure.models.UserResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
@@ -44,7 +44,7 @@ class CarResponseMapperTest {
                 .user(userEntity)
                 .build();
         var engineResponse = Mockito.mock(EngineResponse.class);
-        var  userResponse = Mockito.mock(UserResponse.class);
+        var userResponse = Mockito.mock(UserResponse.class);
 
         Mockito.when(engineMapper.map(engineEntity)).thenReturn(engineResponse);
         Mockito.when(userMapper.map(userEntity)).thenReturn(userResponse);

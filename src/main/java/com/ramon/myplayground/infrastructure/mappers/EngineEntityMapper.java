@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.presentation.dtos.EngineRequest;
+import com.ramon.myplayground.infrastructure.models.EngineRequest;
 import com.ramon.myplayground.infrastructure.repositories.models.EngineEntity;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.ramon.myplayground.infrastructure.services;
 
-import com.ramon.myplayground.application.presentation.dtos.CarRequest;
 import com.ramon.myplayground.domain.exceptions.CarNotFoundException;
 import com.ramon.myplayground.infrastructure.mappers.CarEntityMapper;
+import com.ramon.myplayground.infrastructure.models.CarRequest;
 import com.ramon.myplayground.infrastructure.repositories.CarRepository;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import org.assertj.core.api.Assertions;

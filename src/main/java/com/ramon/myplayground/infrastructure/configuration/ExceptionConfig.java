@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ExceptionConfig extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { RuntimeException.class })
+    @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleCustomException(RuntimeException ex, WebRequest request) {
         if (!(ex instanceof ProblemDetails problem)) {
             return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);

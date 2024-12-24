@@ -1,4 +1,4 @@
-package com.ramon.myplayground.application.presentation.dtos;
+package com.ramon.myplayground.infrastructure.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,14 +10,14 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class CarResponse extends RepresentationModel<CarResponse>  {
+public class CarResponse extends RepresentationModel<CarResponse> {
 
     private final UUID id;
     private final String make;
     private final String model;
+    private final BigDecimal price;
     private Year yearMake;
     private Year yearModel;
-    private final BigDecimal price;
     private String color;
     private EngineResponse engine;
     private UserResponse user;

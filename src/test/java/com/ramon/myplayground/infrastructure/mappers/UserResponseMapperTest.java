@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.presentation.dtos.UserResponse;
+import com.ramon.myplayground.infrastructure.models.UserResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

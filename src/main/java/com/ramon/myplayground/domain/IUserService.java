@@ -1,6 +1,6 @@
-package com.ramon.myplayground.application.services;
+package com.ramon.myplayground.domain;
 
-import com.ramon.myplayground.application.presentation.dtos.UserRequest;
+import com.ramon.myplayground.infrastructure.models.UserRequest;
 import com.ramon.myplayground.infrastructure.repositories.models.UserEntity;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.ramon.myplayground.infrastructure.mappers;
 
-import com.ramon.myplayground.application.presentation.dtos.CarResponse;
+import com.ramon.myplayground.infrastructure.models.CarResponse;
 import com.ramon.myplayground.infrastructure.repositories.models.CarEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
