@@ -103,7 +103,7 @@ class CarControllerTest {
         ResponseEntity<CarResponse> actual = unit.updateCar(uuidMock, request);
 
         Assertions.assertThat(actual.getBody()).isEqualTo(response);
-        Assertions.assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        Assertions.assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
