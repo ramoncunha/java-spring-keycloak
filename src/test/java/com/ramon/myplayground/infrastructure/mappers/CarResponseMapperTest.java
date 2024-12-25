@@ -53,9 +53,9 @@ class CarResponseMapperTest {
                 carEntity.getId(),
                 carEntity.getMake(),
                 carEntity.getModel(),
+                carEntity.getPrice(),
                 carEntity.getYearMake(),
                 carEntity.getYearModel(),
-                carEntity.getPrice(),
                 carEntity.getColor(),
                 engineResponse,
                 userResponse

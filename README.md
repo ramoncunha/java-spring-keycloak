@@ -2,8 +2,8 @@
 
 The objective of this project is to test some spring modules. I'm using the following tools:
 
-- Java 17
-- PostgreSQL
+- Java 21
+- PostgreSQL 15
 - Keycloak
 - OpenAPI
 - Docker

@@ -17,9 +17,9 @@ public class CarResponseMapper {
                 carEntity.getId(),
                 carEntity.getMake(),
                 carEntity.getModel(),
+                carEntity.getPrice(),
                 carEntity.getYearMake(),
                 carEntity.getYearModel(),
-                carEntity.getPrice(),
                 carEntity.getColor(),
                 engineMapper.map(carEntity.getEngine()),
                 userMapper.map(carEntity.getUser())

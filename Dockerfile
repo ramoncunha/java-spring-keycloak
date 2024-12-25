@@ -1,11 +1,11 @@
-FROM eclipse-temurin:17-jdk-jammy AS build
+FROM amazoncorretto:21 AS build
 
 WORKDIR /app
 COPY . /app
 RUN ["chmod", "+x", "mvnw"]
 RUN ["./mvnw", "install"]
 
-FROM eclipse-temurin:17-jdk-jammy AS dev
+FROM amazoncorretto:21-alpine-jdk AS dev
 
 WORKDIR /app
 COPY --from=build /app/target/myplayground-0.0.1-SNAPSHOT.jar /app/car-api.jar

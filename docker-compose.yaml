@@ -3,7 +3,7 @@ version: '3'
 services:
   api:
     container_name: car-api
-    image: ramoncunha/carapi
+    build: .
     environment:
       - DATABASE_URL=jdbc:postgresql://postgres:5432/car_api
       - DATABASE_USER=postgres
