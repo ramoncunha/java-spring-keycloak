@@ -19,7 +19,13 @@ configuration if you want.
 
 On your command line terminal just run:
 
-`$ docker-compose up`
+`$ docker compose up`
+
+Spring API uses port 8080, PostgreSQL 5432 and Keycloak 8443. 
+
+If you want to run on your local machine use this command:
+
+`$ docker compose -f docker-compose-local.yaml up`
 
 Remember to be on the project folder.
 
@@ -43,4 +49,4 @@ When running docker-compose it will create a folder named **data**  and will con
 
 ## OAuth
 
-TODO
+Open Keycloak Admin Console using http://localhost:8443
