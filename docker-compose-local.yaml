@@ -15,7 +15,7 @@ services:
       retries: 10
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./dbdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
