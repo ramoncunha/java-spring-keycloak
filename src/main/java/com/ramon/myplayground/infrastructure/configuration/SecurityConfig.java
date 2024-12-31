@@ -4,6 +4,7 @@ import com.nimbusds.jose.shaded.gson.internal.LinkedTreeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,22 +30,24 @@ public class SecurityConfig {
 
     public static final String ROLE_PREFIX = "ROLE_";
     private static final String ROLE_ADMIN = "CARAPI_ADMIN";
+    private static final String ROLE_CREATE = "CARAPI_CREATE";
+    private static final String ROLE_UPDATE = "CARAPI_UPDATE";
+    private static final String ROLE_DELETE = "CARAPI_DELETE";
     private static final String ROLES = "roles";
 
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize
-                            .requestMatchers("/user").hasAnyRole(ROLE_ADMIN)
-                            .anyRequest().permitAll();
-                })
-                .oauth2ResourceServer(oauth -> {
-                    oauth.jwt().jwtAuthenticationConverter(new KeycloakJwtConverter());
-                })
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST, "/cars").hasAnyRole(ROLE_CREATE)
+                        .requestMatchers(HttpMethod.PUT, "/cars/*").hasAnyRole(ROLE_UPDATE)
+                        .requestMatchers(HttpMethod.DELETE, "/cars/*").hasAnyRole(ROLE_DELETE)
+                        .requestMatchers(HttpMethod.GET, "/cars").permitAll()
+                        .requestMatchers("/users").permitAll()
+                        .anyRequest().hasRole(ROLE_ADMIN))
+                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(new KeycloakJwtConverter())))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .headers(headers -> headers.frameOptions().sameOrigin())
                 .build();
     }
 
@@ -81,6 +84,7 @@ public class SecurityConfig {
                     .collect(Collectors.toSet());
         }
 
+        @SuppressWarnings("unchecked")
         private Stream<String> extractRealmRoles(final Jwt jwt) {
             return Optional.ofNullable(jwt.getClaimAsMap("realm_access"))
                     .map(resource -> (Collection<String>) resource.get(ROLES))
@@ -88,6 +92,7 @@ public class SecurityConfig {
                     .stream();
         }
 
+        @SuppressWarnings({"unchecked", "rawtypes"})
         private Stream<String> extractResourceRoles(final Jwt jwt) {
             final Function<Map.Entry<String, Object>, Stream<String>> mapResources =
                     resource -> {
@@ -103,7 +108,7 @@ public class SecurityConfig {
                             .toList();
 
             return Optional.ofNullable(jwt.getClaimAsMap("resource_access"))
-                    .map(resources -> resources.entrySet())
+                    .map(Map::entrySet)
                     .map(mapResource)
                     .orElse(Collections.emptyList())
                     .stream();
