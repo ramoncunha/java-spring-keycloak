@@ -29,7 +29,6 @@ docker compose up --build
 This command will run this API on port 8080, PostgreSQL on port 5432 and Keycloak on port 8443.
 You can go to Keycloak section and see how to configure authentication.
 
-
 ### Run locally
 
 If you want to run this application on your IDE we will run only PostgreSQL and Keycloak on Docker.
