@@ -8,5 +8,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${keycloak.host}/realms/${keycloak.realm}/protocol/openid-connect/certs
-          issuer-uri: ${keycloak.host}/realms/${keycloak.realm}
+          jwk-set-uri: ${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/certs
+          issuer-uri: ${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}
+
+keycloak:
+  realm: ${KEYCLOAK_REALM}
+  host: ${KEYCLOAK_HOST}
