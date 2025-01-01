@@ -9,6 +9,7 @@ The objective of this project is to test some spring modules. I'm using the foll
 - Keycloak
 - Docker
 - Spring HATEOAS
+- GitHub Actions
 - Spring Boot's layer tools for Docker
 
 ## How to Run
