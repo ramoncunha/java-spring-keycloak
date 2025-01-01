@@ -2,13 +2,25 @@ FROM amazoncorretto:21 AS build
 
 WORKDIR /app
 COPY . /app
-RUN ["chmod", "+x", "mvnw"]
-RUN ["./mvnw", "install"]
+RUN chmod +x mvnw && \
+    ./mvnw package -DskipTests
 
-FROM amazoncorretto:21-alpine-jdk AS dev
+FROM build AS extract
 
 WORKDIR /app
-COPY --from=build /app/target/myplayground-0.0.1-SNAPSHOT.jar /app/car-api.jar
+
+RUN java -Djarmode=layertools -jar target/myplayground-0.0.1-SNAPSHOT.jar extract \
+    --destination target/extracted
+
+FROM eclipse-temurin:21-jre-jammy AS final
+
+WORKDIR /app
+
+COPY --from=extract app/target/extracted/dependencies/ ./
+COPY --from=extract app/target/extracted/spring-boot-loader/ ./
+COPY --from=extract app/target/extracted/snapshot-dependencies/ ./
+COPY --from=extract app/target/extracted/application/ ./
+
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=default", "-jar", "car-api.jar"]
+ENTRYPOINT [ "java", "-Dspring.profiles.active=development", "org.springframework.boot.loader.launch.JarLauncher" ]

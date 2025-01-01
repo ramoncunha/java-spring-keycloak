@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/car_api}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/car_api}
     username: ${DATABASE_USER:postgres}
     password: ${DATABASE_PASSWORD:pgsql}
   jpa:
@@ -17,8 +17,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${KEYCLOAK_HOST:http://keycloak:8443}/realms/${KEYCLOAK_REALM:car-realm}/protocol/openid-connect/certs
-          issuer-uri: ${KEYCLOAK_HOST:http://keycloak:8443}/realms/${KEYCLOAK_REALM:car-realm}
+          jwk-set-uri: ${KEYCLOAK_HOST:http://localhost:8443}/realms/${KEYCLOAK_REALM:car-realm}/protocol/openid-connect/certs
+          issuer-uri: ${KEYCLOAK_HOST:http://localhost:8443}/realms/${KEYCLOAK_REALM:car-realm}
 
 keycloak:
   realm: ${KEYCLOAK_REALM}

@@ -8,8 +8,8 @@ services:
       - DATABASE_URL=jdbc:postgresql://postgres:5432/car_api
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=pgsql
-      - keycloak.realm=car-realm
-      - keycloak.host=http://keycloak:8443
+      - KEYCLOAK_REAM=car-realm
+      - KEYCLOAK_HOST=http://keycloak:8443
     ports:
       - "8080:8080"
     depends_on:
@@ -32,7 +32,7 @@ services:
       retries: 10
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
