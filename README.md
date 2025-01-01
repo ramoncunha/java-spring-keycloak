@@ -1,4 +1,4 @@
-# Spring Framework 3.1.0 Playground
+# Spring Playground Sample Application
 
 The objective of this project is to test some spring modules. I'm using the following tools:
 
@@ -9,27 +9,44 @@ The objective of this project is to test some spring modules. I'm using the foll
 - Keycloak
 - Docker
 - Spring HATEOAS
+- Spring Boot's layer tools for Docker
 
 ## How to Run
 
-_To run this project you must have Docker running on your machine._
+_To run this project you must have Docker running on your machine.
+Remember to be on the project folder._
 
 To create the app image I use a Dockerfile with multi-stage building and you can change any
 configuration if you want.
 
-On your command line terminal just run:
+Let's get this app running! On your command line terminal just run:
 
-`$ docker compose up`
+```
+docker compose up --build
+```
 
-Spring API uses port 8080, PostgreSQL 5432 and Keycloak 8443. 
+This command will run this API on port 8080, PostgreSQL on port 5432 and Keycloak on port 8443.
+You can go to Keycloak section and see how to configure authentication.
 
-If you want to run on your local machine use this command:
 
-`$ docker compose -f docker-compose-local.yaml up`
+### Run locally
 
-Remember to be on the project folder.
+If you want to run this application on your IDE we will run only PostgreSQL and Keycloak on Docker.
+Use the following command:
 
-### Keycloak
+```
+docker compose -f docker-compose-local.yaml up
+```
+
+Open your favorite IDE and set the following VM Option before run this app:
+
+```
+-Dspring.profiles.active=local
+```
+
+We do htis do get the correct environment variables. Now you can run and code!
+
+## Keycloak
 You must configure Keycloak to use this application. Follow these steps:
 
 1. Go to `http://localhost:8443/`
@@ -74,7 +91,3 @@ curl --location 'http://localhost:8443/realms/car-realm/protocol/openid-connect/
 I choose PostgreSQL because it's a robust and powerful DBMS and fits this application.
 
 When running docker-compose it will create a folder named **dbdata**  and will contain all files used by database.
-
-## OAuth
-
-Open Keycloak Admin Console using http://localhost:8443
