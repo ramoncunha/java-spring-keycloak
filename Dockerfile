@@ -16,6 +16,17 @@ FROM eclipse-temurin:21-jre-jammy AS final
 
 WORKDIR /app
 
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+
 COPY --from=extract app/target/extracted/dependencies/ ./
 COPY --from=extract app/target/extracted/spring-boot-loader/ ./
 COPY --from=extract app/target/extracted/snapshot-dependencies/ ./
