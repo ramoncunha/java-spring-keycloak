@@ -5,11 +5,11 @@ services:
     container_name: car-api
     build: .
     environment:
-      - DATABASE_URL=jdbc:postgresql://postgres:5432/car_api
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=pgsql
-      - KEYCLOAK_REAM=car-realm
-      - KEYCLOAK_HOST=http://keycloak:8443
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      KEYCLOAK_REAM: ${KEYCLOAK_REAM}
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
     ports:
       - "8080:8080"
     depends_on:
@@ -22,9 +22,9 @@ services:
     container_name: postgres
     image: postgres:15-alpine
     environment:
-      - POSTGRES_DB=car_api
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=pgsql
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d car_api -U postgres"]
       interval: 3s
@@ -42,8 +42,18 @@ services:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:21.1.2
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8443
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "8443:8080"
     command:
