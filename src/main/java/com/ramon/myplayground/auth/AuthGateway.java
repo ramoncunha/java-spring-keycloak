@@ -45,7 +45,6 @@ public class AuthGateway {
         this.objectMapper = objectMapper;
     }
 
-    @SuppressWarnings("preview")
     public void saveUser(UserRequest userRequest) {
         var token = getToken();
         var user = UserRepresentation.builder()
@@ -67,9 +66,9 @@ public class AuthGateway {
             String json = objectMapper.writeValueAsString(user);
             var body = RequestBody.create(json, JSON);
             request = new Request.Builder()
-                    .url(STR."\{keycloakUrl}/admin/realms/\{keycloakRealm}/users")
+                    .url(String.format("%s/admin/realms/%s/users", keycloakUrl, keycloakRealm))
                     .post(body)
-                    .header("Authorization", STR."\{token.getTokenType()} \{token.getAccessToken()}")
+                    .header("Authorization", String.format("%s %s", token.getTokenType(), token.getAccessToken()))
                     .build();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -81,19 +80,14 @@ public class AuthGateway {
         }
     }
 
-    @SuppressWarnings("preview")
     public Token getToken() {
-        var body = RequestBody.create(STR."""
-        grant_type=password&
-        client_id=\{keycloakClientId}&
-        client_secret=\{keycloakClientSecret}
-        &username=\{keycloakUsername}&
-        password=\{keycloakPassword}
-        """, X_WWW_FORM_URLENCODED);
+        String authBody = String.format("grant_type=password&client_id=%s&client_secret=%s&username=%s&password=%s",
+                keycloakClientId, keycloakClientSecret, keycloakUsername, keycloakPassword);
+        var requestBody = RequestBody.create(authBody, X_WWW_FORM_URLENCODED);
 
         var request = new Request.Builder()
-                .url(STR."\{keycloakUrl}/realms/\{keycloakRealm}/protocol/openid-connect/token")
-                .post(body)
+                .url(String.format("%s/realms/%s/protocol/openid-connect/token", keycloakUrl, keycloakRealm))
+                .post(requestBody)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             assert response.body() != null;
