@@ -14,3 +14,7 @@ spring:
 keycloak:
   realm: ${KEYCLOAK_REALM}
   host: ${KEYCLOAK_HOST}
+  clientId: ${KEYCLOAK_ID}
+  clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+  username: ${KEYCLOAK_USERNAME}
+  password: ${KEYCLOAK_PASSWORD}
