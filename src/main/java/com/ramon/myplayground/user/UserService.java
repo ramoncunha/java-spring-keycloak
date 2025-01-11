@@ -16,7 +16,7 @@ public class UserService {
     private final AuthGateway authGateway;
 
     public UserEntity save(UserRequest userRequest) {
-        authGateway.saveUser();
+        authGateway.saveUser(userRequest);
 
         UserEntity user = UserEntity.builder()
                 .name(userRequest.name())

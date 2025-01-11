@@ -7,7 +7,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class credential {
+public class CredentialRepresentation {
     private String type;
     private String value;
     private boolean temporary;

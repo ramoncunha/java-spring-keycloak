@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -12,6 +14,7 @@ public class UserRepresentation {
     private String firstName;
     private String lastName;
     private String email;
-    private String enabled;
-    private credential credentials;
+    private boolean emailVerified;
+    private boolean enabled;
+    private List<CredentialRepresentation> credentials;
 }
