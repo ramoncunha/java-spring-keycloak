@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/cars/*").hasAnyRole(ROLE_UPDATE)
                         .requestMatchers(HttpMethod.DELETE, "/cars/*").hasAnyRole(ROLE_DELETE)
                         .requestMatchers(HttpMethod.GET, "/cars").permitAll()
-                        .requestMatchers("/users").permitAll()
+                        .requestMatchers("/api/v1/users").permitAll()
                         .anyRequest().hasRole(ROLE_ADMIN))
                 .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(keycloakJwtConverter)))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
