@@ -29,10 +29,10 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/cars").hasAnyRole(ROLE_CREATE)
-                        .requestMatchers(HttpMethod.PUT, "/cars/*").hasAnyRole(ROLE_UPDATE)
-                        .requestMatchers(HttpMethod.DELETE, "/cars/*").hasAnyRole(ROLE_DELETE)
-                        .requestMatchers(HttpMethod.GET, "/cars").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/cars").hasAnyRole(ROLE_CREATE)
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/cars/*").hasAnyRole(ROLE_UPDATE)
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/cars/*").hasAnyRole(ROLE_DELETE)
+                        .requestMatchers(HttpMethod.GET, "/api/v1/cars").permitAll()
                         .requestMatchers("/api/v1/users").permitAll()
                         .anyRequest().hasRole(ROLE_ADMIN))
                 .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(keycloakJwtConverter)))

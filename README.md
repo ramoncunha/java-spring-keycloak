@@ -52,7 +52,7 @@ You must configure Keycloak to use this application. Follow these steps:
 1. Go to `http://localhost:8443/`
 2. Create a new realm named `car-realm`
 3. Create a new client to connect with this API:
-    - Client Id: `carapi`
+    - Client Id: `car-api`
     - Client authentication: ENABLE - this will make our access to keycloak private
     - Direct access grants: ENABLE
 4. Create new realm roles: `CARAPI_CREATE`, `CARAPI_UPDATE`, `CARAPI_DELETE`
@@ -61,7 +61,7 @@ You must configure Keycloak to use this application. Follow these steps:
 
 ### How to generate a token
 
-Since client authentication is enabled, you need to retrieve the client secret. Navigate to Client > carapi > Credentials
+Since client authentication is enabled, you need to retrieve the client secret. Navigate to Client > car-api > Credentials
 in Keycloak console.
 After obtaining the secret, use it in the following request:
 
@@ -69,7 +69,7 @@ After obtaining the secret, use it in the following request:
 curl --location 'http://localhost:8443/realms/car-realm/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=password' \
---data-urlencode 'client_id=carapi' \
+--data-urlencode 'client_id=car-api' \
 --data-urlencode 'client_secret=GENERATED_SECRET' \
 --data-urlencode 'username=YOUR_USER' \
 --data-urlencode 'password=YOUR_USER'
