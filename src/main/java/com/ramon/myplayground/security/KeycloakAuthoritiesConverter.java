@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 public class KeycloakAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     public static final String ROLE_PREFIX = "ROLE_";
+    private static final String ROLE_LOCALTION = "resource_access";
+    private static final String CLIENT_NAME = "car-api";
     private static final String ROLES = "roles";
 
     @Override
@@ -30,8 +32,9 @@ public class KeycloakAuthoritiesConverter implements Converter<Jwt, Collection<G
 
     @SuppressWarnings("unchecked")
     private Stream<String> extractRealmRoles(final Jwt jwt) {
-        return Optional.ofNullable(jwt.getClaimAsMap("realm_access"))
-                .map(resource -> (Collection<String>) resource.get(ROLES))
+        return Optional.ofNullable(jwt.getClaimAsMap(ROLE_LOCALTION))
+                .map(resource -> (Map<String, Collection<String>>) resource.get(CLIENT_NAME))
+                .map(resource -> resource.get(ROLES))
                 .orElse(Collections.emptyList())
                 .stream();
     }
