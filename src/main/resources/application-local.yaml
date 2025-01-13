@@ -23,7 +23,7 @@ spring:
 keycloak:
   realm: ${KEYCLOAK_REALM:car-realm}
   host: ${KEYCLOAK_HOST:http://localhost:8443}
-  clientId: ${KEYCLOAK_ID:car-api}
+  clientId: ${KEYCLOAK_CLIENT_ID:car-api}
   clientSecret: ${KEYCLOAK_CLIENT_SECRET:changeme}
   username: ${KEYCLOAK_USERNAME:admin}
   password: ${KEYCLOAK_PASSWORD:car-api}

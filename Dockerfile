@@ -34,4 +34,4 @@ COPY --from=extract app/target/extracted/application/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-Dspring.profiles.active=development", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]

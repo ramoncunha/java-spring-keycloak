@@ -34,6 +34,7 @@ build/
 
 ## Database ##
 db-data/
+db-data-keycloak/
 
 ## Env file ##
-.env
+.env.example
