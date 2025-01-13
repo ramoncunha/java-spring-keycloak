@@ -8,7 +8,7 @@ if [[ -z $(docker ps --filter "name=keycloak" -q) ]]; then
   exit 1
 fi
 
-KEYCLOAK_HOST_PORT=${1:-"localhost:8443"}
+KEYCLOAK_HOST_PORT=${1:-"localhost:8181"}
 echo
 echo "KEYCLOAK_HOST_PORT: $KEYCLOAK_HOST_PORT"
 

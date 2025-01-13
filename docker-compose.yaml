@@ -3,18 +3,24 @@ version: '3'
 services:
   api:
     container_name: car-api
-    build: .
+    image: ramoncunha/carapi:latest
     environment:
       DATABASE_URL: ${DATABASE_URL}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      KEYCLOAK_REAM: ${KEYCLOAK_REAM}
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
       KEYCLOAK_HOST: ${KEYCLOAK_HOST}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      KEYCLOAK_USERNAME: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     ports:
       - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
+    env_file:
+      - .env.example
     networks:
       - car-network
 
@@ -35,6 +41,8 @@ services:
       - ./db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    env_file:
+      - .env.example
     networks:
       - car-network
 
@@ -48,16 +56,43 @@ services:
       KC_HTTP_ENABLED: true
       KC_HOSTNAME_STRICT_HTTPS: false
       KC_HEALTH_ENABLED: true
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+      KC_DB_URL: ${KEYCLOAK_DATABASE_URL}
       KC_DB_USERNAME: ${POSTGRES_USER}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "8443:8080"
+      - "8181:8080"
+    depends_on:
+      db-keycloak:
+        condition: service_healthy
     command:
-      - start-dev
+      - start
+    env_file:
+      - .env.example
+    networks:
+      - car-network
+
+  db-keycloak:
+    container_name: db-keycloak
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d keycloak -U postgres" ]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    restart: always
+    volumes:
+      - ./db-data-keycloak:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env.example
     networks:
       - car-network
 
