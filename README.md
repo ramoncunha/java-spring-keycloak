@@ -83,7 +83,7 @@ curl --location 'http://localhost:8181/realms/car-realm/protocol/openid-connect/
 --data-urlencode 'client_id=car-api' \
 --data-urlencode 'client_secret=GENERATED_SECRET' \
 --data-urlencode 'username=YOUR_USER' \
---data-urlencode 'password=YOUR_USER'
+--data-urlencode 'password=YOUR_PASSWORD'
 ```
 
 ## Endpoints
