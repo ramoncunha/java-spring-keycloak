@@ -51,7 +51,7 @@ services:
     image: quay.io/keycloak/keycloak:26.0.7
     environment:
       KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 8443
+      KC_HOSTNAME_PORT: 8181
       KC_HOSTNAME_STRICT_BACKCHANNEL: false
       KC_HTTP_ENABLED: true
       KC_HOSTNAME_STRICT_HTTPS: false

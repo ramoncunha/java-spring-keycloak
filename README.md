@@ -26,7 +26,7 @@ Let's get this app running! On your command line terminal just run:
 docker compose up --build
 ```
 
-This command will run this API on port 8080, PostgreSQL on port 5432 and Keycloak on port 8443.
+This command will run this API on port 8080, PostgreSQL on port 5432 and Keycloak on port 8181.
 You can go to Keycloak section and see how to configure authentication.
 
 ### Run locally
@@ -44,12 +44,23 @@ Open your favorite IDE and set the following VM Option before run this app:
 -Dspring.profiles.active=local
 ```
 
-We do htis do get the correct environment variables. Now you can run and code!
+We do rhis do get the correct environment variables. Now you can run and code!
 
-## Keycloak
+## Keycloak configuration - Automatic
+
+Execute the `init-keycloak.sh` script to create users, clients, groups, and roles.
+This script will:
+- Create the car-realm
+- Configure the car-api client
+- Set up roles and groups
+- Return the admin token
+
+Note: Ensure the script has execution permissions before running it.
+
+## Keycloak configuration - Manual mode
 You must configure Keycloak to use this application. Follow these steps:
 
-1. Go to `http://localhost:8443/`
+1. Go to `http://localhost:8181/`
 2. Create a new realm named `car-realm`
 3. Create a new client to connect with this API:
     - Client Id: `car-api`
@@ -66,7 +77,7 @@ in Keycloak console.
 After obtaining the secret, use it in the following request:
 
 ```curl
-curl --location 'http://localhost:8443/realms/car-realm/protocol/openid-connect/token' \
+curl --location 'http://localhost:8181/realms/car-realm/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=password' \
 --data-urlencode 'client_id=car-api' \
