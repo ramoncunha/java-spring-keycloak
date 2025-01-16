@@ -66,17 +66,20 @@ public class AuthGateway {
             String json = objectMapper.writeValueAsString(user);
             var body = RequestBody.create(json, JSON);
             request = new Request.Builder()
-                    .url(String.format("%s/admin/realms/%s/users", keycloakUrl, keycloakRealm))
+                        .url(String.format("%s/admin/realms/%s/users", keycloakUrl, keycloakRealm))
                     .post(body)
                     .header("Authorization", String.format("%s %s", token.getTokenType(), token.getAccessToken()))
                     .build();
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new AuthenticationException(e);
         }
 
         try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new AuthenticationException(String.format("Keycloak user not created: %s", response));
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new AuthenticationException(e);
         }
     }
 
@@ -94,7 +97,7 @@ public class AuthGateway {
             var responseAsString = response.body().string();
             return objectMapper.readValue(responseAsString, Token.class);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new AuthenticationException(e);
         }
     }
 }

@@ -24,6 +24,6 @@ public class CarNotFoundException extends RuntimeException implements ProblemDet
 
     @Override
     public URI getType() {
-        return URI.create("any");
+        return URI.create("sample:error:car-not-found");
     }
 }

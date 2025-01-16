@@ -15,10 +15,13 @@ public class ExceptionConfig extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleCustomException(RuntimeException ex, WebRequest request) {
         if (!(ex instanceof ProblemDetails problem)) {
-            return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+            final var problemDetails = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
+            problemDetails.setTitle("Unexpected Error");
+            problemDetails.setDetail(ex.getMessage());
+            return handleExceptionInternal(ex, problemDetails, new HttpHeaders(), HttpStatus.valueOf(problemDetails.getStatus()), request);
         }
 
-        var problemDetails = ProblemDetail.forStatus(problem.getStatus());
+        final var problemDetails = ProblemDetail.forStatus(problem.getStatus());
         problemDetails.setTitle(problem.getTitle());
         problemDetails.setDetail(problem.getDetail());
         problemDetails.setType(problem.getType());
